@@ -1,0 +1,45 @@
+{
+  "name": "yt-upload",
+  "version": "1.0.0",
+  "description": "CLI tool to bulk upload and schedule YouTube videos with one command",
+  "main": "bin/yt-upload.js",
+  "bin": {
+    "yt-upload": "bin/yt-upload.js"
+  },
+  "scripts": {
+    "start": "node bin/yt-upload.js"
+  },
+  "keywords": [
+    "youtube",
+    "upload",
+    "video",
+    "scheduler",
+    "bulk-upload",
+    "cli",
+    "youtube-api",
+    "content-creator"
+  ],
+  "author": "fix2015",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fix2015/yt-upload.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fix2015/yt-upload/issues"
+  },
+  "homepage": "https://github.com/fix2015/yt-upload#readme",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "files": [
+    "bin/",
+    "scripts/",
+    "README.md",
+    "LICENSE"
+  ],
+  "dependencies": {
+    "commander": "^11.1.0",
+    "chalk": "^4.1.2"
+  }
+}
