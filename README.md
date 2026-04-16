@@ -1,8 +1,8 @@
-# yt-upload
+# youtube-publish
 
 > CLI tool to bulk upload and schedule YouTube videos with one command.
 
-[![npm version](https://img.shields.io/npm/v/yt-upload.svg)](https://www.npmjs.com/package/yt-upload)
+[![npm version](https://img.shields.io/npm/v/youtube-publish.svg)](https://www.npmjs.com/package/youtube-publish)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Upload an entire folder of videos to YouTube — with scheduling, playlists, deduplication, and dry-run preview. No manual uploading, one video at a time.
@@ -11,13 +11,13 @@ Upload an entire folder of videos to YouTube — with scheduling, playlists, ded
 
 ```bash
 # 1. Setup (one-time)
-npx yt-upload setup --client ./client_secret.json
+npx youtube-publish setup --client ./client_secret.json
 
 # 2. Authenticate (opens browser)
-npx yt-upload auth
+npx youtube-publish auth
 
 # 3. Upload all videos from a folder
-npx yt-upload upload --path ./videos/
+npx youtube-publish upload --path ./videos/
 ```
 
 ## Prerequisites
@@ -38,15 +38,15 @@ npx yt-upload upload --path ./videos/
 ### Setup
 
 ```bash
-yt-upload setup --client ./client_secret.json
+youtube-publish setup --client ./client_secret.json
 ```
 
-Installs Python dependencies and copies credentials to `~/.yt-upload/`.
+Installs Python dependencies and copies credentials to `~/.youtube-publish/`.
 
 ### Authenticate
 
 ```bash
-yt-upload auth
+youtube-publish auth
 ```
 
 Opens a browser for one-time Google OAuth login. Token is saved for future use.
@@ -55,38 +55,38 @@ Opens a browser for one-time Google OAuth login. Token is saved for future use.
 
 ```bash
 # Upload all unuploaded videos from a folder
-yt-upload upload --path ./videos/
+youtube-publish upload --path ./videos/
 
 # Upload a single file
-yt-upload upload --file ./my-video.mp4
+youtube-publish upload --file ./my-video.mp4
 
 # Preview without uploading
-yt-upload upload --path ./videos/ --dry-run
+youtube-publish upload --path ./videos/ --dry-run
 
 # Add all uploads to a playlist (creates if not found)
-yt-upload upload --path ./videos/ --playlist "JS Tips"
+youtube-publish upload --path ./videos/ --playlist "JS Tips"
 ```
 
 ### Schedule
 
 ```bash
 # Schedule 1 video/day starting from a date (6PM UTC)
-yt-upload upload --path ./videos/ --schedule 2026-05-01
+youtube-publish upload --path ./videos/ --schedule 2026-05-01
 
 # Every 2 days
-yt-upload upload --path ./videos/ --schedule 2026-05-01 --interval 2
+youtube-publish upload --path ./videos/ --schedule 2026-05-01 --interval 2
 
 # Auto-schedule 3 videos/day at peak engagement times (8AM, 2PM, 6PM UTC)
-yt-upload upload --path ./videos/ --auto
+youtube-publish upload --path ./videos/ --auto
 
 # Auto-schedule starting from a specific date
-yt-upload upload --path ./videos/ --auto --auto-from 2026-05-01
+youtube-publish upload --path ./videos/ --auto --auto-from 2026-05-01
 ```
 
 ### List Status
 
 ```bash
-yt-upload list --path ./videos/
+youtube-publish list --path ./videos/
 ```
 
 Shows which videos have been uploaded, their YouTube URLs, and scheduled times.
@@ -95,7 +95,7 @@ Shows which videos have been uploaded, their YouTube URLs, and scheduled times.
 
 1. **Scans** the video folder for `.mp4` files
 2. **Deduplicates** — if multiple versions of the same topic exist (by filename), keeps the latest
-3. **Skips** already-uploaded videos (tracked in `.yt-upload-history.json` in the videos folder)
+3. **Skips** already-uploaded videos (tracked in `.youtube-publish-history.json` in the videos folder)
 4. **Generates metadata** — title from filename, auto-generated description and tags
 5. **Uploads** via YouTube Data API v3 with resumable uploads (handles large files)
 6. **Optionally schedules** at peak engagement times
@@ -116,9 +116,9 @@ Files without a timestamp prefix are used as-is.
 
 | What | Where |
 |------|-------|
-| Credentials | `~/.yt-upload/client_secret.json` |
-| Auth token | `~/.yt-upload/youtube_token.json` |
-| Upload history | `<videos-dir>/.yt-upload-history.json` |
+| Credentials | `~/.youtube-publish/client_secret.json` |
+| Auth token | `~/.youtube-publish/youtube_token.json` |
+| Upload history | `<videos-dir>/.youtube-publish-history.json` |
 
 ## Related Tools
 

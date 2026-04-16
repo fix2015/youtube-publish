@@ -11,7 +11,7 @@ const chalk = require('chalk');
 
 const pkg = require('../package.json');
 const SCRIPTS_DIR = path.join(__dirname, '..', 'scripts');
-const CONFIG_DIR = path.join(os.homedir(), '.yt-upload');
+const CONFIG_DIR = path.join(os.homedir(), '.youtube-publish');
 const PYTHON_SCRIPT = path.join(SCRIPTS_DIR, 'upload_to_youtube.py');
 
 // Ensure config dir exists
@@ -78,7 +78,7 @@ function runPython(args, videosPath) {
 }
 
 program
-  .name('yt-upload')
+  .name('youtube-publish')
   .version(pkg.version)
   .description('Bulk upload and schedule YouTube videos from the command line');
 
@@ -88,7 +88,7 @@ program
   .description('Set up credentials and install Python dependencies')
   .option('-c, --client <path>', 'Path to client_secret.json from Google Cloud Console')
   .action((opts) => {
-    console.log(chalk.bold('\n🎬 yt-upload Setup\n'));
+    console.log(chalk.bold('\n🎬 youtube-publish Setup\n'));
 
     ensureConfigDir();
 
@@ -127,13 +127,13 @@ program
         console.log('  2. Create a project → Enable YouTube Data API v3');
         console.log('  3. Create OAuth 2.0 credentials (Desktop app)');
         console.log('  4. Download the JSON file');
-        console.log(`  5. Run: ${chalk.cyan('yt-upload setup --client ./client_secret.json')}`);
+        console.log(`  5. Run: ${chalk.cyan('youtube-publish setup --client ./client_secret.json')}`);
       }
     }
 
     console.log(chalk.bold('\n✅ Setup complete!\n'));
     console.log(`  Config directory: ${CONFIG_DIR}`);
-    console.log(`  Next: ${chalk.cyan('yt-upload auth')}`);
+    console.log(`  Next: ${chalk.cyan('youtube-publish auth')}`);
     console.log('');
   });
 
@@ -146,7 +146,7 @@ program
     const clientSecret = path.join(CONFIG_DIR, 'client_secret.json');
     if (!fs.existsSync(clientSecret)) {
       console.error(chalk.red('❌ client_secret.json not found.'));
-      console.error(`   Run: ${chalk.cyan('yt-upload setup --client ./client_secret.json')}`);
+      console.error(`   Run: ${chalk.cyan('youtube-publish setup --client ./client_secret.json')}`);
       process.exit(1);
     }
     runPython(['--auth']);
@@ -169,7 +169,7 @@ program
     const clientSecret = path.join(CONFIG_DIR, 'client_secret.json');
     if (!fs.existsSync(clientSecret)) {
       console.error(chalk.red('❌ Not set up yet.'));
-      console.error(`   Run: ${chalk.cyan('yt-upload setup --client ./client_secret.json')}`);
+      console.error(`   Run: ${chalk.cyan('youtube-publish setup --client ./client_secret.json')}`);
       process.exit(1);
     }
 

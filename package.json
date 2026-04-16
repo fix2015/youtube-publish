@@ -1,10 +1,10 @@
 {
-  "name": "yt-uploader",
+  "name": "youtube-publish",
   "version": "1.0.0",
   "description": "CLI tool to bulk upload and schedule YouTube videos with one command",
   "main": "bin/yt-upload.js",
   "bin": {
-    "yt-uploader": "bin/yt-upload.js"
+    "youtube-publish": "bin/yt-upload.js"
   },
   "scripts": {
     "start": "node bin/yt-upload.js"
