@@ -1,6 +1,6 @@
 {
   "name": "youtube-publish",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "CLI tool to bulk upload and schedule YouTube videos with one command",
   "main": "bin/yt-upload.js",
   "bin": {
