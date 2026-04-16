@@ -23,12 +23,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fix2015/yt-upload.git"
+    "url": "git+https://github.com/fix2015/youtube-publish.git"
   },
   "bugs": {
-    "url": "https://github.com/fix2015/yt-upload/issues"
+    "url": "https://github.com/fix2015/youtube-publish/issues"
   },
-  "homepage": "https://github.com/fix2015/yt-upload#readme",
+  "homepage": "https://github.com/fix2015/youtube-publish#readme",
   "engines": {
     "node": ">=14.0.0"
   },
