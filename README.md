@@ -120,16 +120,6 @@ Files without a timestamp prefix are used as-is.
 | Auth token | `~/.youtube-publish/youtube_token.json` |
 | Upload history | `<videos-dir>/.youtube-publish-history.json` |
 
-## Related Tools
-
-| Package | Description | Install |
-|---------|-------------|---------|
-| [load-skill](https://github.com/fix2015/load-skill) | AI coding skills for Claude Code, Cursor, Codex | `npx load-skill` |
-| [load-rules](https://github.com/fix2015/load-rules) | AI coding rules for Cursor, Copilot, Claude Code | `npx load-rules` |
-| [load-agents](https://github.com/fix2015/load-agents) | AI agent definitions for Claude Code, Codex, Copilot | `npx load-agents` |
-| [load-hooks](https://github.com/fix2015/load-hooks) | Hooks for Claude Code and AI coding tools | `npx load-hooks` |
-| [load-mcp](https://github.com/fix2015/load-mcp) | MCP servers for Claude Code, Cursor, and more | `npx load-mcp` |
-
 ## License
 
 MIT
