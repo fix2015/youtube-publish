@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>youtube-publish — Bulk Upload and Schedule YouTube Videos</title>
+  <meta name="description" content="CLI tool to bulk upload and schedule YouTube videos with one command. Scheduling, playlists, filtering, deduplication, and dry-run preview.">
+  <meta name="keywords" content="youtube, upload, schedule, bulk upload, cli, nodejs, video, playlist, youtube api, automation">
+  <meta name="author" content="Vitalii Semianchuk">
+  <meta property="og:title" content="youtube-publish — Bulk Upload and Schedule YouTube Videos">
+  <meta property="og:description" content="CLI tool to bulk upload and schedule YouTube videos. Scheduling, playlists, filtering, deduplication, dry-run preview.">
+  <meta property="og:url" content="https://fix2015.github.io/youtube-publish">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <button class="hamburger" aria-label="Menu">&#9776;</button>
+  <a href="#" class="header-brand"><span>youtube</span>-publish</a>
+  <div class="header-links">
+    <span class="badge">v1.0.0</span>
+    <a href="https://github.com/fix2015/youtube-publish" target="_blank">GitHub</a>
+    <a href="https://www.npmjs.com/package/youtube-publish" target="_blank">npm</a>
+  </div>
+</header>
+
+<!-- Sidebar -->
+<div class="sidebar-overlay"></div>
+<nav class="sidebar">
+  <div class="sidebar-group">
+    <div class="sidebar-group-title">Getting Started</div>
+    <a href="#quickstart">Quick Start</a>
+    <a href="#prerequisites">Prerequisites</a>
+    <a href="#setup">Setup Guide</a>
+  </div>
+  <div class="sidebar-group">
+    <div class="sidebar-group-title">Commands</div>
+    <a href="#cmd-guide">guide</a>
+    <a href="#cmd-setup">setup</a>
+    <a href="#cmd-auth">auth</a>
+    <a href="#cmd-upload">upload</a>
+    <a href="#cmd-schedule">schedule</a>
+    <a href="#cmd-list">list</a>
+    <a href="#cmd-reset">reset</a>
+  </div>
+  <div class="sidebar-group">
+    <div class="sidebar-group-title">Reference</div>
+    <a href="#options">Options Table</a>
+    <a href="#categories">YouTube Categories</a>
+    <a href="#how-it-works">How It Works</a>
+    <a href="#files">File Locations</a>
+  </div>
+</nav>
+
+<!-- Main -->
+<div class="main">
+
+<!-- Hero -->
+<div class="hero">
+  <h1>youtube-publish</h1>
+  <p class="subtitle">Bulk upload and schedule YouTube videos<br>One command. Scheduling, playlists, filtering, deduplication.</p>
+  <div class="install-cmd"><code>npx youtube-publish upload --path ./videos/</code></div>
+  <div class="hero-buttons">
+    <a href="#quickstart" class="btn btn-primary">Get Started</a>
+    <a href="https://github.com/fix2015/youtube-publish" target="_blank" class="btn btn-outline">GitHub</a>
+    <a href="https://www.npmjs.com/package/youtube-publish" target="_blank" class="btn btn-outline">npm</a>
+  </div>
+  <p class="meta">MIT License <span>&middot;</span> Node.js 14+ <span>&middot;</span> YouTube Data API v3</p>
+</div>
+
+<div class="content">
+
+<!-- Feature cards -->
+<div class="features">
+  <div class="feature-card">
+    <h3>Bulk Upload</h3>
+    <p>Upload an entire folder of .mp4 files at once. Auto-generates titles, descriptions, and tags from filenames.</p>
+  </div>
+  <div class="feature-card">
+    <h3>Smart Scheduling</h3>
+    <p>Schedule videos at specific intervals or use auto-scheduling with 3 videos/day at peak engagement times.</p>
+  </div>
+  <div class="feature-card">
+    <h3>Deduplication</h3>
+    <p>Tracks upload history to skip already-uploaded videos. Keeps only the latest version per topic by filename.</p>
+  </div>
+</div>
+
+<!-- Quick Start -->
+<section id="quickstart">
+  <h1>Getting Started</h1>
+  <h2>Quick Start</h2>
+  <pre><code class="language-bash"># 1. Get your Google credentials (step-by-step guide)
+npx youtube-publish guide
+
+# 2. Save credentials
+npx youtube-publish setup --client ./client_secret.json
+
+# 3. Authenticate (opens browser once)
+npx youtube-publish auth
+
+# 4. Upload!
+npx youtube-publish upload --path ./videos/</code></pre>
+</section>
+
+<section id="prerequisites">
+  <h2>Prerequisites</h2>
+  <ul>
+    <li><strong>Node.js</strong> >= 14</li>
+    <li><strong>Python 3</strong> with pip</li>
+    <li><strong>Google Cloud project</strong> with YouTube Data API v3 enabled</li>
+  </ul>
+</section>
+
+<section id="setup">
+  <h2>Setup Guide — Getting Google Credentials</h2>
+  <p>Run <code>youtube-publish guide</code> for detailed step-by-step instructions, or follow these steps:</p>
+  <ol>
+    <li>Go to <a href="https://console.cloud.google.com/" target="_blank">Google Cloud Console</a></li>
+    <li>Create a project</li>
+    <li>Enable <strong>YouTube Data API v3</strong> (APIs &amp; Services &rarr; Library)</li>
+    <li>Configure <strong>OAuth consent screen</strong> (External, add yourself as test user)</li>
+    <li>Create <strong>OAuth 2.0 Client ID</strong> (Credentials &rarr; Desktop app)</li>
+    <li>Download the JSON file &mdash; this is your <code>client_secret.json</code></li>
+  </ol>
+</section>
+
+<!-- Commands -->
+<section id="cmd-guide">
+  <h1>Commands</h1>
+  <h2>guide — How to Get Credentials</h2>
+  <pre><code class="language-bash">youtube-publish guide</code></pre>
+  <p>Prints step-by-step instructions for getting <code>client_secret.json</code> from Google Cloud Console.</p>
+</section>
+
+<section id="cmd-setup">
+  <h2>setup — Save Credentials</h2>
+  <pre><code class="language-bash">youtube-publish setup --client ./client_secret.json</code></pre>
+  <p>Installs Python dependencies and copies your credentials to <code>~/.youtube-publish/</code>.</p>
+</section>
+
+<section id="cmd-auth">
+  <h2>auth — Login with Google</h2>
+  <pre><code class="language-bash">youtube-publish auth</code></pre>
+  <p>Opens browser for one-time OAuth login. Token auto-refreshes after that.</p>
+</section>
+
+<section id="cmd-upload">
+  <h2>upload — Upload Videos</h2>
+  <pre><code class="language-bash"># Upload all .mp4 files from a folder
+youtube-publish upload --path ./videos/
+
+# Upload a single file
+youtube-publish upload --file ./my-video.mp4
+
+# Preview without uploading
+youtube-publish upload --path ./videos/ --dry-run
+
+# Only upload videos matching a keyword
+youtube-publish upload --path ./videos/ --filter react
+
+# Set privacy (public, unlisted, private)
+youtube-publish upload --path ./videos/ --privacy unlisted
+
+# Add to a playlist (creates if not found)
+youtube-publish upload --path ./videos/ --playlist "JS Tips"
+
+# Set YouTube category (default: 28 = Science &amp; Tech)
+youtube-publish upload --path ./videos/ --category 27</code></pre>
+</section>
+
+<section id="cmd-schedule">
+  <h2>upload — Scheduling Options</h2>
+  <pre><code class="language-bash"># Schedule 1 video/day at 6PM UTC starting from a date
+youtube-publish upload --path ./videos/ --schedule 2026-05-01
+
+# Every 2 days at 2PM UTC
+youtube-publish upload --path ./videos/ --schedule 2026-05-01 --interval 2 --time 14:00
+
+# Auto-schedule 3 videos/day at peak engagement times (8AM, 2PM, 6PM UTC)
+youtube-publish upload --path ./videos/ --auto
+
+# Auto-schedule starting from a specific date
+youtube-publish upload --path ./videos/ --auto --auto-from 2026-05-01
+
+# Combine filter with schedule
+youtube-publish upload --path ./videos/ --filter closure --schedule 2026-05-01</code></pre>
+</section>
+
+<section id="cmd-list">
+  <h2>list — Check Upload Status</h2>
+  <pre><code class="language-bash">youtube-publish list --path ./videos/
+
+# Filter the list
+youtube-publish list --path ./videos/ --filter react</code></pre>
+</section>
+
+<section id="cmd-reset">
+  <h2>reset — Clear Upload History</h2>
+  <pre><code class="language-bash">youtube-publish reset --path ./videos/</code></pre>
+  <p>Clears the upload history so videos can be re-uploaded.</p>
+</section>
+
+<!-- Options Table -->
+<section id="options">
+  <h1>Reference</h1>
+  <h2>Upload Options</h2>
+  <table>
+    <thead><tr><th>Flag</th><th>Description</th><th>Default</th></tr></thead>
+    <tbody>
+      <tr><td><code>-p, --path &lt;dir&gt;</code></td><td>Videos directory</td><td><code>./videos</code></td></tr>
+      <tr><td><code>-f, --file &lt;file&gt;</code></td><td>Upload single file</td><td>&mdash;</td></tr>
+      <tr><td><code>--filter &lt;keyword&gt;</code></td><td>Only videos matching keyword in filename</td><td>&mdash;</td></tr>
+      <tr><td><code>-s, --schedule &lt;date&gt;</code></td><td>Schedule start date (YYYY-MM-DD)</td><td>&mdash;</td></tr>
+      <tr><td><code>-i, --interval &lt;days&gt;</code></td><td>Days between scheduled uploads</td><td><code>1</code></td></tr>
+      <tr><td><code>-t, --time &lt;HH:MM&gt;</code></td><td>Publish time in UTC</td><td><code>18:00</code></td></tr>
+      <tr><td><code>--auto</code></td><td>Auto-schedule 3/day at peak times</td><td>&mdash;</td></tr>
+      <tr><td><code>--auto-from &lt;date&gt;</code></td><td>Start date for --auto</td><td>tomorrow</td></tr>
+      <tr><td><code>--privacy &lt;status&gt;</code></td><td>public, private, or unlisted</td><td><code>public</code></td></tr>
+      <tr><td><code>--playlist &lt;name&gt;</code></td><td>Playlist name or ID</td><td>&mdash;</td></tr>
+      <tr><td><code>--category &lt;id&gt;</code></td><td>YouTube category ID</td><td><code>28</code></td></tr>
+      <tr><td><code>--dry-run</code></td><td>Preview without uploading</td><td>&mdash;</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="categories">
+  <h2>YouTube Category IDs</h2>
+  <table>
+    <thead><tr><th>ID</th><th>Category</th></tr></thead>
+    <tbody>
+      <tr><td>22</td><td>People &amp; Blogs</td></tr>
+      <tr><td>24</td><td>Entertainment</td></tr>
+      <tr><td>25</td><td>News &amp; Politics</td></tr>
+      <tr><td>27</td><td>Education</td></tr>
+      <tr><td>28</td><td>Science &amp; Technology</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="how-it-works">
+  <h2>How It Works</h2>
+  <ol>
+    <li><strong>Scans</strong> the video folder for <code>.mp4</code> files</li>
+    <li><strong>Filters</strong> by keyword if <code>--filter</code> is set</li>
+    <li><strong>Deduplicates</strong> &mdash; keeps only the latest version per topic (by filename)</li>
+    <li><strong>Skips</strong> already-uploaded videos (tracked in <code>.yt-upload-history.json</code>)</li>
+    <li><strong>Generates metadata</strong> &mdash; title from filename, auto-generated description and tags</li>
+    <li><strong>Uploads</strong> via YouTube Data API v3 with resumable uploads</li>
+    <li><strong>Optionally schedules</strong> at specified times</li>
+  </ol>
+  <h3>Filename Convention</h3>
+  <pre><code>YYYYMMDD_HHMMSS_topic_name.mp4  →  Title: "Topic Name"
+my_cool_video.mp4                →  Title: "My Cool Video"</code></pre>
+</section>
+
+<section id="files">
+  <h2>File Locations</h2>
+  <table>
+    <thead><tr><th>What</th><th>Where</th></tr></thead>
+    <tbody>
+      <tr><td>Credentials</td><td><code>~/.youtube-publish/client_secret.json</code></td></tr>
+      <tr><td>Auth token</td><td><code>~/.youtube-publish/youtube_token.json</code></td></tr>
+      <tr><td>Upload history</td><td><code>&lt;videos-dir&gt;/.yt-upload-history.json</code></td></tr>
+    </tbody>
+  </table>
+</section>
+
+</div><!-- .content -->
+
+<!-- Footer -->
+<footer class="footer">
+  <p>youtube-publish — Bulk Upload and Schedule YouTube Videos</p>
+  <p>Built by Vitalii Semianchuk</p>
+  <p>
+    <a href="https://github.com/fix2015/youtube-publish">GitHub</a>
+    <a href="https://www.npmjs.com/package/youtube-publish">npm</a>
+    <a href="https://github.com/fix2015/youtube-publish/issues">Report Issue</a>
+  </p>
+  <p>MIT License</p>
+</footer>
+
+</div><!-- .main -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
